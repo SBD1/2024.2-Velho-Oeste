@@ -1,0 +1,47 @@
+site_name: Velho Oeste
+
+repo_name: 2024.2-Velho-Oeste 
+repo_url: https://github.com/SBD1/2024.2-Velho-Oeste
+
+theme: 
+  language: pt-BR
+  icon:
+    repo: fontawesome/brands/github
+  palette: 
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      pygments_lang_class: true
+      auto_title: true
+      linenums: true
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+
+plugins:
+  - glightbox
+
+extra_css:
+  - stylesheets/extra.css
+    
+nav:
+  - Início: index.md
+  - Modelagem:
+    - Diagrama Entidade-Relacionamento: modelagem/Diagrama_Entidade_Relacionamento.md
+    - Modelo Entidade-Relacionamento: modelagem/Modelo_Entidade_Relacionamento.md
+    - Dicionário de Dados: modelagem/Dicionario_Dados.md
