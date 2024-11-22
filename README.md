@@ -5,3 +5,14 @@ No papel de um caçador de recompensas, o jogador viaja de cidade em cidade pelo
 
 Mergulhe nessa experiência e Conquiste o título de "Caçador de Recompensas Lendário" ao capturar todos os bandidos mais procurados e completar desafios nas cidades. 
 
+# Desenvolvedores
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Brenno-Silva01"><img style="border-radius: 50%;" src="https://github.com/Brenno-Silva01.png" width="100px;" alt=""/><br /><sub><b>Brenno da Silva</b></sub></a><br />
+    <td align="center"><a href="https://github.com/daniel-de-sousa"><img style="border-radius: 50%;" src="https://github.com/daniel-de-sousa.png" width="100px;" alt=""/><br /><sub><b>Daniel de Souza</b></sub></a><br />
+    <td align="center"><a href="https://github.com/JeffersonSenaa"><img style="border-radius: 50%;" src="https://github.com/JeffersonSenaa.png" width="100px;" alt=""/><br /><sub><b>Jefferson Sena</b></sub></a><br />
+     <td align="center"><a href="https://github.com/luishenrrique"><img style="border-radius: 50%;" src="https://github.com/luishenrrique.png" width="100px;" alt=""/><br /><sub><b>Luis Henrique</b></sub></a><br />
+    <td align="center"><a href="https://github.com/FelipeNunesdM"><img style="border-radius: 50%;" src="https://github.com/FelipeNunesdM.png" width="100px;" alt=""/><br /><sub><b>Felipe Nunes</b></sub></a><br />
+  </tr>
+</table>
