@@ -6,36 +6,46 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 
 ## Entidade: **Personagem**
 
-Descrição: Entidade genérica que representa todos os personagens do jogo.
+**Descrição:** Entidade genérica que representa todos os personagens do jogo.
 
 | Nome Variável     | Tipo       | Descrição                               | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|-----------------------------------------|----------------------|------------------------|----------|
 | id_personagem     | INT        | Identificador único do personagem       | 1-10000              | não                    | PK       |
 | nome              | VARCHAR    | Nome do personagem                      | 1-255 caracteres     | não                    | -        |
-| tipo              | VARCHAR    | Tipo de personagem (NPC, Jogador, etc.) | 1-255 caracteres     | não                    | -        |
-| funcao            | VARCHAR       | Função desempenhada no jogo             | -                    | sim                    | -        |
+| classe              | VARCHAR    | Classe de personagem (NPC, Jogador, etc.) | 1-255 caracteres     | não                    | -        |
 
 ---
 
-## Entidade: **Principal**
+## Entidade: **Personagem Principal**
 
-Descrição: Subentidade de Personagem, representando o personagem controlado pelo jogador.
+**Descrição:** Subentidade de Personagem, representando o personagem controlado pelo jogador.
 
 | Nome Variável     | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------|----------------------|------------------------|----------|
-| id_personagem     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
+| id_pers_principal    | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | inventario        | VARCHAR       | Itens do personagem        | -                    | sim                    | -        |
 | reputacao         | INT        | Reputação do personagem    | 0-100                | não                    | -        |
 
 ---
 
+## Entidade: **NPC**
+
+**Descrição:** Subentidade genérica de Personagem. Representa os personagens não jogáveis que interagem com o jogador.
+
+| Nome Variável  | Tipo       | Descrição                          | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
+|----------------|------------|------------------------------------|----------------------|------------------------|----------|
+| id_NPC  | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
+| funcao            | VARCHAR       | Função desempenhada no jogo             | -                    | não                   | -        |
+
+---
+
 ## Entidade: **Sheriff**
 
-Descrição: Subentidade de Personagem, representando o xerife do jogo.
+**Descrição:** Subentidade de NPC, representando o xerife do jogo.
 
 | Nome Variável     | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------|----------------------|------------------------|----------|
-| id_personagem     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
+| id_Sheriff     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | delegacia         | VARCHAR    | Cidade onde o xerife atua  | 1-255 caracteres     | não                    | -        |
 | lista_missoes     | VARCHAR       | Missões disponíveis        | -                    | sim                    | -        |
 
@@ -43,11 +53,11 @@ Descrição: Subentidade de Personagem, representando o xerife do jogo.
 
 ## Entidade: **Xamã**
 
-Descrição: Subentidade de Personagem, representando o curandeiro do jogo.
+**Descrição:** Subentidade de NPC, representando o curandeiro do jogo.
 
 | Nome Variável     | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------|----------------------|------------------------|----------|
-| id_personagem     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
+| id_Xama     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | tipos_cura        | VARCHAR       | Tipos de cura disponíveis  | -                    | sim                    | -        |
 | buffs             | VARCHAR      | Buffs criados pelo xamã    | -                    | sim                    | -        |
 
@@ -55,11 +65,11 @@ Descrição: Subentidade de Personagem, representando o curandeiro do jogo.
 
 ## Entidade: **Bandido**
 
-Descrição: Subentidade de Personagem, representando os bandidos do jogo.
+**Descrição:** Subentidade de NPC, representando os bandidos do jogo.
 
 | Nome Variável         | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-----------------------|------------|----------------------------|----------------------|------------------------|----------|
-| id_personagem         | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
+| id_Bandido         | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | especialidade         | VARCHAR    | Tipo de crime cometido     | 1-255 caracteres     | não                    | -        |
 | nivel_periculosidade  | INT        | Nível de periculosidade    | 1-10                 | não                    | -        |
 | recompensa            | VARCHAR    | Recompensa oferecida       | 1-255 caracteres     | sim                    | -        |
@@ -68,11 +78,11 @@ Descrição: Subentidade de Personagem, representando os bandidos do jogo.
 
 ## Entidade: **Ferreiro**
 
-Descrição: Subentidade de Personagem, representando ferreiros no jogo.
+**Descrição:** Subentidade de NPC, representando ferreiros no jogo.
 
 | Nome Variável         | Tipo       | Descrição                         | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-----------------------|------------|-----------------------------------|----------------------|------------------------|----------|
-| id_personagem         | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
+| id_Ferreiro        | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | tipos_equipamento      | VARCHAR       | Equipamentos que podem ser melhorados | -                    | sim                    | -        |
 | materiais             | VARCHAR       | Materiais necessários para reparo | -                    | sim                    | -        |
 
@@ -80,11 +90,11 @@ Descrição: Subentidade de Personagem, representando ferreiros no jogo.
 
 ## Entidade: **Comerciante**
 
-Descrição: Subentidade de Personagem, representando os comerciantes no jogo.
+**Descrição:** Subentidade de NPC, representando os comerciantes no jogo.
 
 | Nome Variável     | Tipo       | Descrição                         | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|-----------------------------------|----------------------|------------------------|----------|
-| id_personagem     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
+| id_Comerciante     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | itens_venda       | VARCHAR       | Itens disponíveis para venda      | -                    | sim                    | -        |
 | local_atuacao     | VARCHAR    | Local onde o comerciante atua     | 1-255 caracteres     | não                    | -        |
 
@@ -92,11 +102,11 @@ Descrição: Subentidade de Personagem, representando os comerciantes no jogo.
 
 ## Entidade: **Dama do Saloon**
 
-Descrição: Subentidade de Personagem, representando a NPC Dama do Saloon.
+**Descrição:** Subentidade de NPC, representando a NPC Dama do Saloon.
 
 | Nome Variável     | Tipo       | Descrição                         | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|-----------------------------------|----------------------|------------------------|----------|
-| id_personagem     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK   |
+| id_Dama    | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK   |
 | dicas             | VARCHAR       | Dicas fornecidas sobre o jogo     | -                    | sim                    | -        |
 | pequenas_missoes  | VARCHAR       | Pequenas missões disponíveis      | -                    | sim                    | -        |
 
@@ -104,7 +114,7 @@ Descrição: Subentidade de Personagem, representando a NPC Dama do Saloon.
 
 ## Entidade: **Animal**
 
-Descrição: Entidade genérica que representa todos os tipos de animais no jogo, seja para trabalho, transporte ou interação.
+**Descrição:** Entidade genérica que representa todos os tipos de animais no jogo, seja para trabalho, transporte ou interação.
 
 | Nome Variável  | Tipo       | Descrição                    | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|------------------------------|----------------------|------------------------|----------|
@@ -112,27 +122,27 @@ Descrição: Entidade genérica que representa todos os tipos de animais no jogo
 | nome           | VARCHAR    | Nome do animal               | 1-255 caracteres     | não                    | -        |
 | tipo           | VARCHAR    | Tipo de animal (Gado, Cavalo, Cachorro) | 1-255 caracteres     | não                    | -        |
 | cor            | VARCHAR    | Cor do animal                | 1-255 caracteres     | sim                    | -        |
-
+| vidaMax        | INT        | Vida que o animal possui     | 1-100                | não                    | -        |
 ---
 
 ## Entidade: **Gado**
 
-Descrição: Subentidade de Animal, representando o gado no jogo.
+**Descrição:** Subentidade de Animal, representando o gado no jogo.
 
 | Nome Variável  | Tipo       | Descrição                      | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|--------------------------------|----------------------|------------------------|----------|
-| id_animal      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK  |
+| id_gado      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK  |
 | tipo_gado      | VARCHAR    | Tipo de gado (Vaca, Búfalo, etc.) | 1-255 caracteres     | não                    | -        |
 
 ---
 
 ## Entidade: **Cavalo**
 
-Descrição: Subentidade de Animal, representando os cavalos no jogo.
+**Descrição:** Subentidade de Animal, representando os cavalos no jogo.
 
 | Nome Variável  | Tipo       | Descrição                      | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|--------------------------------|----------------------|------------------------|----------|
-| id_animal      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK   |
+| id_cavalo      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK   |
 | tipo_cavalo    | VARCHAR    | Tipo de cavalo (Cavalo de Corrida, Cavalo de Trabalho, etc.) | 1-255 caracteres     | não                    | -        |
 | velocidade     | INT        | Velocidade do cavalo (quanto maior, mais rápido) | 1-100                | sim                    | -        |
 
@@ -140,19 +150,19 @@ Descrição: Subentidade de Animal, representando os cavalos no jogo.
 
 ## Entidade: **Cachorro**
 
-Descrição: Subentidade de Animal, representando os cachorros no jogo.
+**Descrição:** Subentidade de Animal, representando os cachorros no jogo.
 
 | Nome Variável  | Tipo       | Descrição                      | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|--------------------------------|----------------------|------------------------|----------|
-| id_animal      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK   |
-| tipo_cachorro  | VARCHAR    | Tipo de cachorro (Pastor, Labrador, etc.) | 1-255 caracteres     | não                    | -        |
+| id_cachorro      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK   |
+| especie  | VARCHAR    | Espécie do cachorro (Pastor, Labrador, etc.) | 1-255 caracteres     | não                    | -        |
 | habilidade     | VARCHAR    | Habilidade especial do cachorro (Protetor, Caçador, etc.) | 1-255 caracteres     | sim                    | -        |
 
 ---
 
 ## Entidade: **Cidade**
 
-Descrição: Representa as cidades presentes no jogo, que podem ser exploradas pelos jogadores e onde ocorrem interações.
+**Descrição:** Representa as cidades presentes no jogo, que podem ser exploradas pelos jogadores e onde ocorrem interações.
 
 | Nome Variável  | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|----------------------------|----------------------|------------------------|----------|
@@ -164,7 +174,7 @@ Descrição: Representa as cidades presentes no jogo, que podem ser exploradas p
 
 ## Entidade: **Missão**
 
-Descrição: Representa missões disponíveis para os jogadores, com diferentes objetivos e recompensas.
+**Descrição:** Representa missões disponíveis para os jogadores, com diferentes objetivos e recompensas.
 
 | Nome Variável  | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|----------------------------|----------------------|------------------------|----------|
@@ -178,7 +188,7 @@ Descrição: Representa missões disponíveis para os jogadores, com diferentes 
 
 ## Entidade: **Local**
 
-Descrição: Representa locais específicos no mapa do jogo, como pontos de interesse ou áreas interativas.
+**Descrição:** Representa locais específicos no mapa do jogo, como pontos de interesse ou áreas interativas.
 
 | Nome Variável  | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|----------------------------|----------------------|------------------------|----------|
@@ -188,26 +198,39 @@ Descrição: Representa locais específicos no mapa do jogo, como pontos de inte
 
 ---
 
+## Entidade: **Inventário**
+
+**Descrição:** Representa os itens possuídos pelo Personagem Principal, como armas, equipamentos e itens especiais.
+
+| Nome da Variável      | Tipo     | Descrição                                              | Valores Permitidos | Permite Valores Nulos? | É Chave?           |
+|-----------------------|----------|--------------------------------------------------------|--------------------|------------------------|--------------------|
+| id_inventario         | INT      | Identificador único do inventário                     | 1-10000            | não                    | PK                 |
+| id_pers_principal | INT     | Identificador do personagem principal                 | 1-10000            | não                    | FK |
+| id_item               | INT      | Identificador do item presente no inventário          | 1-10000            | não                    | FK          |
+| PesoMax            | INT      | Peso máximo que o inventário suporta(Quantidade de itens)       | 1-100              | sim                    | -                  |
+
+---
+
 ## Entidade: **Item**
 
-Descrição: Entidade genérica que representa todos os itens disponíveis no jogo, desde consumíveis a armas.
+**Descrição:** Entidade genérica que representa todos os itens disponíveis no jogo, desde consumíveis a armas.
 
 | Nome Variável  | Tipo       | Descrição                          | Valores Permitidos     | Permite Valores Nulos? | É Chave? |
 |----------------|------------|------------------------------------|------------------------|------------------------|----------|
 | id_item        | INT        | Identificador único do item        | 1-1000                | não                    | PK       |
 | nome           | VARCHAR    | Nome do item                      | 1-255 caracteres       | não                    | -        |
-| tipo_item      | VARCHAR    | Tipo de item (Ex.: Arma, Consumível, munição) | 1-255 caracteres | não                    | -        |
+| categoria      | VARCHAR    | categoria do item (Ex.: Arma, item especial, munição, etc) | 1-255 caracteres | não                    | -        |
 | descricao      | VARCHAR       | Descrição detalhada do item        | -                      | sim                    | -        |
 
 ---
 
 ## Entidade: **Item Especial**
 
-Descrição: Subentidade de Item. Representa itens raros ou únicos no jogo, que podem ser obtidos em missões ou eventos.
+**Descrição:** Subentidade de Item. Representa itens raros ou únicos no jogo, que podem ser obtidos em missões ou eventos.
 
 | Nome Variável      | Tipo       | Descrição                          | Valores Permitidos     | Permite Valores Nulos? | É Chave? |
 |--------------------|------------|------------------------------------|------------------------|------------------------|----------|
-| id_item            | INT        | Identificador único do item (herdado) | 1-1000                | não                    | FK   |
+| id_item_especial           | INT        | Identificador único do item (herdado) | 1-1000                | não                    | FK   |
 | efeito_especial    | VARCHAR      | Efeito único proporcionado pelo item | -                      | sim                    | -        |
 | origem             | VARCHAR    | Onde o item foi obtido             | 1-255 caracteres       | sim                    | -        |
 
@@ -215,11 +238,11 @@ Descrição: Subentidade de Item. Representa itens raros ou únicos no jogo, que
 
 ## Entidade: **Arma**
 
-Descrição: Subentidade Genérica de Item. Representa armas usadas no jogo, que podem ser de diferentes tipos e ter atributos específicos.
+**Descrição:** Subentidade Genérica de Item. Representa armas usadas no jogo, que podem ser de diferentes tipos e ter atributos específicos.
 
 | Nome Variável      | Tipo       | Descrição                          | Valores Permitidos     | Permite Valores Nulos? | É Chave? |
 |--------------------|------------|------------------------------------|------------------------|------------------------|----------|
-| id_item            | INT        | Identificador único do item (herdado) | 1-1000                | não                    | FK  |
+| id_arma            | INT        | Identificador único do item (herdado) | 1-1000                | não                    | FK  |
 | tipo_arma          | VARCHAR    | Tipo de arma (Ex.: Espingarda, Pistola, etc.) | 1-255 caracteres | não                    | -        |
 | dano               | INT        | Dano causado pela arma             | 1-100                 | não                    | -        |
 | alcance            | INT        | Alcance da arma (em metros)        | 1-100                 | sim                    | -        |
@@ -228,11 +251,11 @@ Descrição: Subentidade Genérica de Item. Representa armas usadas no jogo, que
 
 ## Entidade: **Espingarda Serrada**
 
-Descrição: Subentidade de arma.
+**Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_item           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK   |
+| id_Espingarda_Serrada          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK   |
 | cartuchos         | INT        | Capacidade de munição                  | 1-10               | não                    | -        |
 | dano_extra_curto  | INT        | Dano adicional em curtas distâncias    | 1-50               | sim                    | -        |
 
@@ -240,11 +263,11 @@ Descrição: Subentidade de arma.
 
 ## Entidade: **Colt .45**
 
-Descrição: Subentidade de arma.
+**Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_item           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
+| id_Colt_45           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
 | municao           | INT        | Capacidade de munição                  | 1-12               | não                    | -        |
 | tempo_recarga     | FLOAT      | Tempo de recarga (em segundos)         | 1.0-5.0            | não                    | -        |
 
@@ -252,11 +275,11 @@ Descrição: Subentidade de arma.
 
 ## Entidade: **Rifle**
 
-Descrição: Subentidade de arma.
+**Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_item           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
+| id_rifle          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
 | alcance_max       | INT        | Alcance máximo (em metros)             | 1-200              | não                    | -        |
 | precisao          | FLOAT      | Precisão da arma (de 0 a 1)            | 0.1-1.0            | não                   | -        |
 
@@ -264,23 +287,23 @@ Descrição: Subentidade de arma.
 
 ## Entidade: **Revolver**
 
-Descrição: Subentidade de arma.
+**Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_item           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
+| id_revolver           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
 | municao           | INT        | Capacidade de munição                  | 1-6                | não                    | -        |
 | velocidade_tiro   | FLOAT      | Velocidade do projétil (em m/s)        | 1.0-20.0           | sim                    | -        |
 
 ---
 
-## Entidade: **Facas**
+## Entidade: **Faca**
 
-Descrição: Subentidade de arma.
+**Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_item           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
+| id_faca           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
 | dano_corte        | INT        | Dano causado por golpes de corte       | 1-50               | não                    | -        |
 | durabilidade      | INT        | Durabilidade da faca                  | 1-100              | sim                    | -        |
 
@@ -288,11 +311,11 @@ Descrição: Subentidade de arma.
 
 ## Entidade: **Pólvora Explosiva**
 
-Descrição: Subentidade de arma.
+**Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_item           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
+| id_polvora          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
 | raio_explosao     | INT        | Raio da explosão (em metros)           | 1-20               | não                    | -        |
 | dano_area         | INT        | Dano em área                          | 1-100              | não                    | -        |
 
@@ -300,11 +323,11 @@ Descrição: Subentidade de arma.
 
 ## Entidade: **Pistola Derringer**
 
-Descrição: Subentidade de arma.
+**Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_item           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
+| id_pistola           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
 | agilidade_tiro    | FLOAT      | Agilidade para atirar (em segundos)    | 0.1-1.0            | não                    | -        |
 | recuo             | FLOAT      | Recuo da arma (impacto no jogador)     | 0.1-2.0            | não                    | -        |
 
@@ -315,3 +338,5 @@ Descrição: Subentidade de arma.
 | Versão |    Data    |                     Descrição                     |                                                                                                Autor(es)                                                                                                 |
 | :----: | :--------: | :-----------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | `1.0`  | 23/11/2024 | Primeira versão do Dicionário de Dados | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
+| `2.0`  | 23/11/2024 | Adicionando Entidades NPC e Inventário | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
+| `2.1`  | 23/11/2024 | Atualizando alguns atributos e seus nomes | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
