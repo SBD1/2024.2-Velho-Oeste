@@ -13,6 +13,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | id_personagem     | INT        | Identificador único do personagem       | 1-10000              | não                    | PK       |
 | nome              | VARCHAR    | Nome do personagem                      | 1-255 caracteres     | não                    | -        |
 | classe              | VARCHAR    | Classe de personagem (NPC, Jogador, etc.) | 1-255 caracteres     | não                    | -        |
+| vidaMax              | INT    | Nivél da vida do personagem | 1-10000     | sim                    | -        |
 
 ---
 
@@ -25,6 +26,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | id_pers_principal    | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | inventario        | VARCHAR       | Itens do personagem        | -                    | sim                    | -        |
 | reputacao         | INT        | Reputação do personagem    | 0-100                | não                    | -        |
+| dinheiro         | INT        | Dinheiro que o personagem possui    | 0-10000                | não                    | -        |
 
 ---
 
@@ -47,7 +49,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 |-------------------|------------|----------------------------|----------------------|------------------------|----------|
 | id_Sheriff     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | delegacia         | VARCHAR    | Cidade onde o xerife atua  | 1-255 caracteres     | não                    | -        |
-| lista_missoes     | VARCHAR       | Missões disponíveis        | -                    | sim                    | -        |
+| missão     | VARCHAR       | Missões disponíveis        | -                    | sim                    | -        |
 
 ---
 
@@ -71,7 +73,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 |-----------------------|------------|----------------------------|----------------------|------------------------|----------|
 | id_Bandido         | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | especialidade         | VARCHAR    | Tipo de crime cometido     | 1-255 caracteres     | não                    | -        |
-| nivel_periculosidade  | INT        | Nível de periculosidade    | 1-10                 | não                    | -        |
+| periculosidade  | INT        | Nível de periculosidade    | 1-10                 | não                    | -        |
 | recompensa            | VARCHAR    | Recompensa oferecida       | 1-255 caracteres     | sim                    | -        |
 
 ---
@@ -83,7 +85,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável         | Tipo       | Descrição                         | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-----------------------|------------|-----------------------------------|----------------------|------------------------|----------|
 | id_Ferreiro        | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
-| tipos_equipamento      | VARCHAR       | Equipamentos que podem ser melhorados | -                    | sim                    | -        |
+| tipos_item      | VARCHAR       | Itens que podem ser melhorados | -                    | sim                    | -        |
 | materiais             | VARCHAR       | Materiais necessários para reparo | -                    | sim                    | -        |
 
 ---
@@ -108,7 +110,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 |-------------------|------------|-----------------------------------|----------------------|------------------------|----------|
 | id_Dama    | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK   |
 | dicas             | VARCHAR       | Dicas fornecidas sobre o jogo     | -                    | sim                    | -        |
-| pequenas_missoes  | VARCHAR       | Pequenas missões disponíveis      | -                    | sim                    | -        |
+| missoes  | VARCHAR       | Pequenas missões disponíveis      | -                    | sim                    | -        |
 
 ---
 
@@ -123,6 +125,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | tipo           | VARCHAR    | Tipo de animal (Gado, Cavalo, Cachorro) | 1-255 caracteres     | não                    | -        |
 | cor            | VARCHAR    | Cor do animal                | 1-255 caracteres     | sim                    | -        |
 | vidaMax        | INT        | Vida que o animal possui     | 1-100                | não                    | -        |
+
 ---
 
 ## Entidade: **Gado**
@@ -132,7 +135,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável  | Tipo       | Descrição                      | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|--------------------------------|----------------------|------------------------|----------|
 | id_gado      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK  |
-| tipo_gado      | VARCHAR    | Tipo de gado (Vaca, Búfalo, etc.) | 1-255 caracteres     | não                    | -        |
+| especie      | VARCHAR    | Espécie de gado (Vaca, Búfalo, etc.) | 1-255 caracteres     | não                    | -        |
 
 ---
 
@@ -183,6 +186,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | descricao      | VARCHAR      | Descrição da missão        | -                    | sim                    | -        |
 | recompensa     | VARCHAR    | Recompensa dada pela missão | 1-255 caracteres     | sim                    | -        |
 | tipo           | VARCHAR    | Tipo de missão (Primária ou Secundária) | Primária, Secundária | não                    | -        |
+| recompensa_missao          | INT    | Valor da recompensa da missão | 1-10000 | não                    | -        |
 
 ---
 
@@ -193,8 +197,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável  | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|----------------------------|----------------------|------------------------|----------|
 | id_local       | INT        | Identificador único do local | 1-1000              | não                    | PK       |
-| nome           | VARCHAR    | Nome do local              | 1-255 caracteres     | não                    | -        |
-| tipo           | VARCHAR    | Tipo de local (Saloon, Mina, Vila, etc.) | 1-255 caracteres     | não                    | -        |
+| nome           | VARCHAR    | Nome do local (Saloon, Mina, Vila, etc.)             | 1-255 caracteres     | não                    | -        |
 
 ---
 
@@ -243,7 +246,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável      | Tipo       | Descrição                          | Valores Permitidos     | Permite Valores Nulos? | É Chave? |
 |--------------------|------------|------------------------------------|------------------------|------------------------|----------|
 | id_arma            | INT        | Identificador único do item (herdado) | 1-1000                | não                    | FK  |
-| tipo_arma          | VARCHAR    | Tipo de arma (Ex.: Espingarda, Pistola, etc.) | 1-255 caracteres | não                    | -        |
+| tipo          | VARCHAR    | Tipo de arma (Ex.: Espingarda, Pistola, etc.) | 1-255 caracteres | não                    | -        |
 | dano               | INT        | Dano causado pela arma             | 1-100                 | não                    | -        |
 | alcance            | INT        | Alcance da arma (em metros)        | 1-100                 | sim                    | -        |
 
@@ -340,3 +343,4 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | `1.0`  | 23/11/2024 | Primeira versão do Dicionário de Dados | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
 | `2.0`  | 23/11/2024 | Adicionando Entidades NPC e Inventário | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
 | `2.1`  | 23/11/2024 | Atualizando alguns atributos e seus nomes | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
+| `2.2`  | 25/11/2024 | Adicionando alguns atributos e modificando o nome de outros | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
