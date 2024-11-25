@@ -17,4 +17,4 @@ Abaixo temos a imagem do diagrama de entidade relacionamento:
 | `1.1`  | 23/11/2024 | Alguns ajustes e adicionais na versão inicial do Diagrama Entidade Relacionanemto | [Daniel Sousa](https://github.com/daniel-de-sousa) |      |
 | `2.0`  | 23/11/2024 | Seguda versão do Diagrama Entidade Relacionanemto | [Daniel Sousa](https://github.com/daniel-de-sousa) |                                      |
 | `2.1`  | 23/11/2024 | Terceira versão do Diagrama Entidade Relacionanemto | [Luis Henrique](https://github.com/luishenrrique) |                                     |
-| `2.2`  | 23/11/2024 | Atualização do Diagrama Entidade Relacionanemto | [Brenno da Silva](https://github.com/brenno-silva01) |                                     |
+| `2.2`  | 25/11/2024 | Atualização do Diagrama Entidade Relacionanemto | [Brenno da Silva](https://github.com/brenno-silva01) |                                     |
