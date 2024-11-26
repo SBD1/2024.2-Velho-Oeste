@@ -48,7 +48,6 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável     | Tipo       | Descrição                  | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------|----------------------|------------------------|----------|
 | id_Sheriff     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
-| delegacia         | VARCHAR    | Cidade onde o xerife atua  | 1-255 caracteres     | não                    | -        |
 | missão     | VARCHAR       | Missões disponíveis        | -                    | sim                    | -        |
 
 ---
@@ -98,7 +97,6 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 |-------------------|------------|-----------------------------------|----------------------|------------------------|----------|
 | id_Comerciante     | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK  |
 | itens_venda       | VARCHAR       | Itens disponíveis para venda      | -                    | sim                    | -        |
-| local_atuacao     | VARCHAR    | Local onde o comerciante atua     | 1-255 caracteres     | não                    | -        |
 
 ---
 
@@ -109,7 +107,6 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável     | Tipo       | Descrição                         | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|-----------------------------------|----------------------|------------------------|----------|
 | id_Dama    | INT        | Identificador do personagem (herdado) | 1-10000              | não                    | FK   |
-| dicas             | VARCHAR       | Dicas fornecidas sobre o jogo     | -                    | sim                    | -        |
 | missoes  | VARCHAR       | Pequenas missões disponíveis      | -                    | sim                    | -        |
 
 ---
@@ -146,8 +143,10 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável  | Tipo       | Descrição                      | Valores Permitidos   | Permite Valores Nulos? | É Chave? |
 |----------------|------------|--------------------------------|----------------------|------------------------|----------|
 | id_cavalo      | INT        | Identificador único do animal (herdado) | 1-1000              | não                    | FK   |
-| tipo_cavalo    | VARCHAR    | Tipo de cavalo (Cavalo de Corrida, Cavalo de Trabalho, etc.) | 1-255 caracteres     | não                    | -        |
+| categoria    | VARCHAR    | Tipo de cavalo (Cavalo de Corrida, Cavalo de Trabalho, etc.) | 1-255 caracteres     | não                    | -        |
 | velocidade     | INT        | Velocidade do cavalo (quanto maior, mais rápido) | 1-100                | sim                    | -        |
+| pesoMax     | INT        | Peso máximo que o cavalo consegue carregar | 1-100                | não                    | -        |
+| força     | INT        | Quanto de força o cavalo tem (Quanto mais forte mais resistente) | 1-100                | não                   | -        |
 
 ---
 
@@ -186,7 +185,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | descricao      | VARCHAR      | Descrição da missão        | -                    | sim                    | -        |
 | recompensa     | VARCHAR    | Recompensa dada pela missão | 1-255 caracteres     | sim                    | -        |
 | tipo           | VARCHAR    | Tipo de missão (Primária ou Secundária) | Primária, Secundária | não                    | -        |
-| recompensa_missao          | INT    | Valor da recompensa da missão | 1-10000 | não                    | -        |
+| reputação          | INT    | Quantidade de reputação ganha ou perdida pela missão | 1-10 | não                    | -        |
 
 ---
 
@@ -210,7 +209,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | id_inventario         | INT      | Identificador único do inventário                     | 1-10000            | não                    | PK                 |
 | id_pers_principal | INT     | Identificador do personagem principal                 | 1-10000            | não                    | FK |
 | id_item               | INT      | Identificador do item presente no inventário          | 1-10000            | não                    | FK          |
-| PesoMax            | INT      | Peso máximo que o inventário suporta(Quantidade de itens)       | 1-100              | sim                    | -                  |
+| PesoMax            | INT      | Peso máximo que o inventário suporta (Quantidade de itens)       | 1-100              | sim                    | -                  |
 
 ---
 
@@ -224,6 +223,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | nome           | VARCHAR    | Nome do item                      | 1-255 caracteres       | não                    | -        |
 | categoria      | VARCHAR    | categoria do item (Ex.: Arma, item especial, munição, etc) | 1-255 caracteres | não                    | -        |
 | descricao      | VARCHAR       | Descrição detalhada do item        | -                      | sim                    | -        |
+| valor      | INT       | Quanto o item vale (Em dinheiro)       | -                      | não                | -        |
 
 ---
 
@@ -248,31 +248,70 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | id_arma            | INT        | Identificador único do item (herdado) | 1-1000                | não                    | FK  |
 | tipo          | VARCHAR    | Tipo de arma (Ex.: Espingarda, Pistola, etc.) | 1-255 caracteres | não                    | -        |
 | dano               | INT        | Dano causado pela arma             | 1-100                 | não                    | -        |
-| alcance            | INT        | Alcance da arma (em metros)        | 1-100                 | sim                    | -        |
+| alcanceMax            | INT        | Alcance da arma (em metros)        | 1-100                 | sim                    | -        |
+| velocidade            | INT        | Velocidade de ataque da arma       | 1-100                 | não                    | -        |
 
 ---
 
-## Entidade: **Espingarda Serrada**
+## Entidade: **Armas Brancas**
 
 **Descrição:** Subentidade de arma.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
+| id_Arma_Branca          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK   |
+| dano_corte        | INT        | Dano causado por golpes de corte       | 1-50               | não                    | -        |
+| dano_perfuração         | INT        | Dano causado por golpes perfurantes                  | 1-50             | não                    | -        |
+| durabilidade      | INT        | Durabilidade da arma                  | 1-100              | sim                    | -        |
+
+---
+
+## Entidade: **Explosivos**
+
+**Descrição:** Subentidade de arma.
+
+| Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
+|-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
+| id_Explosivos          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK   |
+| raio_explosao     | INT        | Raio da explosão (em metros)           | 1-20               | não                    | -        |
+| dano_area         | INT        | Dano em área                          | 1-100              | não                    | -        |
+
+---
+
+## Entidade: **Armas de Fogo**
+
+**Descrição:** Subentidade de arma.
+
+| Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
+|-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
+| id_Arma_Fogo          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK   |
+| precisao          | FLOAT      | Precisão da arma (de 0 a 1)            | 0.1-1.0            | não                   | -        |
+| recuo             | FLOAT      | Recuo da arma (impacto no jogador)     | 0.1-2.0            | não                    | -        |
+| tempo_recarga          | INT        | Quanto tempo se demora para recarregar a arma | 1-100             | não                    | -   |
+| qtd_munição     | INT        | Quantidade de munição que se tem para aquela arma         | 1-1000               | não                    | -        |
+| capacidade     | INT        | Capacidade de munição do pente da arma                  | 1-6                | não                    | -        |
+| classe         | VARCHAR        | Identificação de que tipo de arma de fogo                  | 1-255               | não                    | -        |
+
+---
+
+## Entidade: **Espingarda Serrada**
+
+**Descrição:** Subentidade de armas de fogo.
+
+| Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
+|-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
 | id_Espingarda_Serrada          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK   |
-| cartuchos         | INT        | Capacidade de munição                  | 1-10               | não                    | -        |
 | dano_extra_curto  | INT        | Dano adicional em curtas distâncias    | 1-50               | sim                    | -        |
 
 ---
 
 ## Entidade: **Colt .45**
 
-**Descrição:** Subentidade de arma.
+**Descrição:** Subentidade de arma de fogo.
 
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
 | id_Colt_45           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
-| municao           | INT        | Capacidade de munição                  | 1-12               | não                    | -        |
-| tempo_recarga     | FLOAT      | Tempo de recarga (em segundos)         | 1.0-5.0            | não                    | -        |
 
 ---
 
@@ -283,8 +322,7 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
 | id_rifle          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
-| alcance_max       | INT        | Alcance máximo (em metros)             | 1-200              | não                    | -        |
-| precisao          | FLOAT      | Precisão da arma (de 0 a 1)            | 0.1-1.0            | não                   | -        |
+| perfuração       | INT        | Quantidade de dano adicional a depender da armadura             | 1-200              | não                    | -        |
 
 ---
 
@@ -295,32 +333,6 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
 | id_revolver           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
-| municao           | INT        | Capacidade de munição                  | 1-6                | não                    | -        |
-| velocidade_tiro   | FLOAT      | Velocidade do projétil (em m/s)        | 1.0-20.0           | sim                    | -        |
-
----
-
-## Entidade: **Faca**
-
-**Descrição:** Subentidade de arma.
-
-| Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
-|-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_faca           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
-| dano_corte        | INT        | Dano causado por golpes de corte       | 1-50               | não                    | -        |
-| durabilidade      | INT        | Durabilidade da faca                  | 1-100              | sim                    | -        |
-
----
-
-## Entidade: **Pólvora Explosiva**
-
-**Descrição:** Subentidade de arma.
-
-| Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
-|-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
-| id_polvora          | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
-| raio_explosao     | INT        | Raio da explosão (em metros)           | 1-20               | não                    | -        |
-| dano_area         | INT        | Dano em área                          | 1-100              | não                    | -        |
 
 ---
 
@@ -331,8 +343,6 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | Nome Variável     | Tipo       | Descrição                              | Valores Permitidos | Permite Valores Nulos? | É Chave? |
 |-------------------|------------|----------------------------------------|--------------------|------------------------|----------|
 | id_pistola           | INT        | Identificador único do item (herdado) | 1-1000             | não                    | FK  |
-| agilidade_tiro    | FLOAT      | Agilidade para atirar (em segundos)    | 0.1-1.0            | não                    | -        |
-| recuo             | FLOAT      | Recuo da arma (impacto no jogador)     | 0.1-2.0            | não                    | -        |
 
 ---
 
@@ -344,3 +354,4 @@ O dicionário de dados são informações sobre os dados armazenados que são pe
 | `2.0`  | 23/11/2024 | Adicionando Entidades NPC e Inventário | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
 | `2.1`  | 23/11/2024 | Atualizando alguns atributos e seus nomes | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
 | `2.2`  | 25/11/2024 | Adicionando alguns atributos e modificando o nome de outros | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
+| `3.0`  | 25/11/2024 | Atualizando o dicionário com base no último DER| [Daniel Sousa](https://github.com/daniel-de-sousa) |                                                |
