@@ -6,7 +6,7 @@ O modelo relacional apresenta um diagrama lógico estruturando as informações 
 ## Diagrama do Modelo Relacional
 
 
-![Modelo Relacional](../assets/modelo_relacional_v1.svg)
+![Modelo Relacional](../assets/diagrama-relacional.svg)
 
 
 ## Histórico de Versão
