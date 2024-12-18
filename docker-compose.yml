@@ -1,0 +1,28 @@
+version: '3.10'
+
+services:
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://velho_oeste_user:vopassword@postgres:5432/velho_oeste_db
+    volumes:
+      - .:/app  
+
+  postgres:
+    image: postgres:latest
+    container_name: velho-oeste-postgres
+    environment:
+      POSTGRES_USER: velho_oeste_user
+      POSTGRES_PASSWORD: vopassword
+      POSTGRES_DB: velho_oeste_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
