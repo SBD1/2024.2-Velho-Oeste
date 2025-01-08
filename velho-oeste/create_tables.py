@@ -8,269 +8,240 @@ def create_tables():
     """ create tables in the PostgreSQL database """
     comandos = (
         """
-        create table PERSONAGEM (
-            idPersonagem int not null auto_increment,
-            nome varchar(40) not null,
-            classe varchar(40) not null,
-            constraint PERSONAGEM_PK primary key (idPersonagem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS PERSONAGEM (
+            idPersonagem SERIAL PRIMARY KEY,
+            nome VARCHAR(40) NOT NULL,
+            classe VARCHAR(40) NOT NULL
+        );
         """,
         """
-        create table PERSONAGEM_PRINCIPAL (
-            idPersonagem int not null,
-            inventario varchar(255),
-            reputacao int,
-            constraint PERSONAGEM_PRINCIPAL_PK primary key (idPersonagem),
-            constraint FK_PERSONAGEM_PRINCIPAL_PERSONAGEM foreign key (idPersonagem) references PERSONAGEM(idPersonagem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS PERSONAGEM_PRINCIPAL (
+            idPersonagem INT PRIMARY KEY,
+            inventario VARCHAR(255),
+            reputacao INT,
+            CONSTRAINT FK_PERSONAGEM_PRINCIPAL_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)
+        );
         """,
         """
-        create table MISSAO (
-            idMissao int not null auto_increment,
-            tipo varchar(50),
-            dinheiro decimal(10, 2),
-            descricao text,
-            reputacao int,
-            constraint MISSAO_PK primary key (idMissao)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS MISSAO (
+            idMissao SERIAL PRIMARY KEY,
+            tipo VARCHAR(50),
+            dinheiro NUMERIC(10, 2),
+            descricao TEXT,
+            reputacao INT
+        );
         """,
         """
-        create table PERSONAGEM_PRINCIPAL_MISSAO (
-            idPersonagem int not null,
-            idMissao int not null,
-            constraint PERSONAGEM_PRINCIPAL_MISSAO_PK primary key (idPersonagem, idMissao),
-            constraint FK_PERSONAGEM_PRINCIPAL_MISSAO_PERSONAGEM foreign key (idPersonagem) references PERSONAGEM_PRINCIPAL(idPersonagem),
-            constraint FK_PERSONAGEM_PRINCIPAL_MISSAO_MISSAO foreign key (idMissao) references MISSAO(idMissao)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS PERSONAGEM_PRINCIPAL_MISSAO (
+            idPersonagem INT,
+            idMissao INT,
+            PRIMARY KEY (idPersonagem, idMissao),
+            CONSTRAINT FK_PERSONAGEM_PRINCIPAL_MISSAO_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM_PRINCIPAL(idPersonagem),
+            CONSTRAINT FK_PERSONAGEM_PRINCIPAL_MISSAO_MISSAO FOREIGN KEY (idMissao) REFERENCES MISSAO(idMissao)
+        );
         """,
         """
-        create table NPC (
-            idNpc int not null auto_increment,
-            idPersonagem int not null,
-            funcao varchar(100),
-            constraint NPC_PK primary key (idNpc),
-            constraint FK_NPC_PERSONAGEM foreign key (idPersonagem) references PERSONAGEM(idPersonagem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS NPC (
+            idNpc SERIAL PRIMARY KEY,
+            idPersonagem INT NOT NULL,
+            funcao VARCHAR(100),
+            CONSTRAINT FK_NPC_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)
+        );
         """,
         """
-        create table DAMA_SALOON (
-            idNpc int not null,
-            dicas text,
-            pequenasMissoes text,
-            constraint DAMA_SALOON_PK primary key (idNpc),
-            constraint FK_DAMA_SALOON_NPC foreign key (idNpc) references NPC(idNpc)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS DAMA_SALOON (
+            idNpc INT PRIMARY KEY,
+            dicas TEXT,
+            pequenasMissoes TEXT,
+            CONSTRAINT FK_DAMA_SALOON_NPC FOREIGN KEY (idNpc) REFERENCES NPC(idNpc)
+        );
         """,
         """
-        create table XAMA (
-            idNpc int not null,
-            tiposCura text,
-            buffs text,
-            constraint XAMA_PK primary key (idNpc),
-            constraint FK_XAMA_NPC foreign key (idNpc) references NPC(idNpc)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS XAMA (
+            idNpc INT PRIMARY KEY,
+            tiposCura TEXT,
+            buffs TEXT,
+            CONSTRAINT FK_XAMA_NPC FOREIGN KEY (idNpc) REFERENCES NPC(idNpc)
+        );
         """,
         """
-        create table BANDIDO (
-            idNpc int not null,
-            especialidade varchar(100),
-            nivelPericulosidade int,
-            recompensa decimal(10,2),
-            constraint BANDIDO_PK primary key (idNpc),
-            constraint FK_BANDIDO_NPC foreign key (idNpc) references NPC(idNpc)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS BANDIDO (
+            idNpc INT PRIMARY KEY,
+            especialidade VARCHAR(100),
+            nivelPericulosidade INT,
+            recompensa NUMERIC(10, 2),
+            CONSTRAINT FK_BANDIDO_NPC FOREIGN KEY (idNpc) REFERENCES NPC(idNpc)
+        );
         """,
         """
-        create table COMERCIANTE (
-            idNpc int not null,
-            itensVenda text,
-            localAtuacao varchar(100),
-            constraint COMERCIANTE_PK primary key (idNpc),
-            constraint FK_COMERCIANTE_NPC foreign key (idNpc) references NPC(idNpc)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS COMERCIANTE (
+            idNpc INT PRIMARY KEY,
+            itensVenda TEXT,
+            localAtuacao VARCHAR(100),
+            CONSTRAINT FK_COMERCIANTE_NPC FOREIGN KEY (idNpc) REFERENCES NPC(idNpc)
+        );
         """,
         """
-        create table SHERIFF (
-            idNpc int not null,
-            delegacia varchar(100),
-            constraint SHERIFF_PK primary key (idNpc),
-            constraint FK_SHERIFF_NPC foreign key (idNpc) references NPC(idNpc)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS SHERIFF (
+            idNpc INT PRIMARY KEY,
+            delegacia VARCHAR(100),
+            CONSTRAINT FK_SHERIFF_NPC FOREIGN KEY (idNpc) REFERENCES NPC(idNpc)
+        );
         """,
         """
-        create table FERREIRO (
-            idNpc int not null,
-            tipoEquipamento varchar(100),
-            materiais text,
-            constraint FERREIRO_PK primary key (idNpc),
-            constraint FK_FERREIRO_NPC foreign key (idNpc) references NPC(idNpc)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS FERREIRO (
+            idNpc INT PRIMARY KEY,
+            tipoEquipamento VARCHAR(100),
+            materiais TEXT,
+            CONSTRAINT FK_FERREIRO_NPC FOREIGN KEY (idNpc) REFERENCES NPC(idNpc)
+        );
         """,
         """
-        create table CIDADE (
-            idCidade int not null,
-            idLocal int not null,
-            nome varchar(100) not null,
-            localizacao varchar(100) not null,
-            constraint CIDADE_PK primary key (idCidade),
-            constraint FK_CIDADE_LOCALIZACAO foreign key (idLocal) references LOCALIZACAO (idLocal)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS LOCALIZACAO (
+            idLocal SERIAL PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL,
+            idMundo INT NOT NULL,
+            CONSTRAINT FK_LOCALIZACAO_MUNDO FOREIGN KEY (idMundo) REFERENCES MUNDO(idMundo)
+        );
         """,
         """
-        create table LOCALIZACAO (
-            idLocal int not null auto_increment,
-            nome varchar(100) not null,
-            idMundo int not null,
-            constraint LOCAL_PK primary key (idLocal),
-            constraint FK_LOCALIZACAO_MUNDO foreign key (idMundo) references MUNDO(idMundo)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS MUNDO (
+            idMundo SERIAL PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL
+        );
         """,
         """
-        create table MUNDO (
-            idMundo int not null auto_increment,
-            nome varchar(100) not null,
-            constraint MUNDO_PK primary key (idMundo)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS CIDADE (
+            idCidade SERIAL PRIMARY KEY,
+            idLocal INT NOT NULL,
+            nome VARCHAR(100) NOT NULL,
+            localizacao VARCHAR(100) NOT NULL,
+            CONSTRAINT FK_CIDADE_LOCALIZACAO FOREIGN KEY (idLocal) REFERENCES LOCALIZACAO(idLocal)
+        );
         """,
         """
-        create table ANIMAL (
-            idAnimal int not null auto_increment,
-            nome varchar(100) not null,
-            tipo varchar(50),
-            idGaiola int,
-            constraint ANIMAL_PK primary key (idAnimal)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS ANIMAL (
+            idAnimal SERIAL PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL,
+            tipo VARCHAR(50),
+            idGaiola INT
+        );
         """,
         """
-        create table CAVALO (
-            idAnimal int not null,
-            idPersonagem int,
-            tipoCavalo varchar(50),
-            velocidade int,
-            constraint CAVALO_PK primary key (idAnimal),
-            constraint FK_CAVALO_ANIMAL foreign key (idAnimal) references ANIMAL(idAnimal),
-            constraint FK_CAVALO_PERSONAGEM foreign key (idPersonagem) references PERSONAGEM(idPersonagem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS CAVALO (
+            idAnimal INT PRIMARY KEY,
+            idPersonagem INT,
+            tipoCavalo VARCHAR(50),
+            velocidade INT,
+            CONSTRAINT FK_CAVALO_ANIMAL FOREIGN KEY (idAnimal) REFERENCES ANIMAL(idAnimal),
+            CONSTRAINT FK_CAVALO_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)
+        );
         """,
         """
-        create table CACHORRO (
-            idAnimal int not null,
-            especie varchar(50),
-            habilidade varchar(50),
-            constraint CACHORRO_PK primary key (idAnimal),
-            constraint FK_CACHORRO_ANIMAL foreign key (idAnimal) references ANIMAL(idAnimal)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS CACHORRO (
+            idAnimal INT PRIMARY KEY,
+            especie VARCHAR(50),
+            habilidade VARCHAR(50),
+            CONSTRAINT FK_CACHORRO_ANIMAL FOREIGN KEY (idAnimal) REFERENCES ANIMAL(idAnimal)
+        );
         """,
         """
-        create table GADO (
-            idAnimal int not null,
-            tipoGado varchar(50),
-            constraint GADO_PK primary key (idAnimal),
-            constraint FK_GADO_ANIMAL foreign key (idAnimal) references ANIMAL(idAnimal)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS GADO (
+            idAnimal INT PRIMARY KEY,
+            tipoGado VARCHAR(50),
+            CONSTRAINT FK_GADO_ANIMAL FOREIGN KEY (idAnimal) REFERENCES ANIMAL(idAnimal)
+        );
         """,
         """
-        create table ITEM (
-            idItem int not null auto_increment,
-            nome varchar(100) not null,
-            categoria varchar(50),
-            descricao text,
-            constraint ITEM_PK primary key (idItem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS ITEM (
+            idItem SERIAL PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL,
+            categoria VARCHAR(50),
+            descricao TEXT
+        );
         """,
         """
-        create table ITEM_ESPECIAL (
-            idItemEspecial int not null,
-            idItem int not null,
-            atributoEspecial varchar(255),
-            constraint ITEM_ESPECIAL_PK primary key (idItemEspecial),
-            constraint FK_ITEM_ESPECIAL_ITEM foreign key (idItem) references ITEM(idItem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS ITEM_ESPECIAL (
+            idItemEspecial SERIAL PRIMARY KEY,
+            idItem INT NOT NULL,
+            atributoEspecial VARCHAR(255),
+            CONSTRAINT FK_ITEM_ESPECIAL_ITEM FOREIGN KEY (idItem) REFERENCES ITEM(idItem)
+        );
         """,
         """
-        create table ARMA (
-            idArma int not null auto_increment,
-            idItem int,
-            tipo varchar(50),
-            alcance int,
-            constraint ARMA_PK primary key (idArma),
-            constraint FK_ARMA_ITEM foreign key (idItem) references ITEM(idItem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS ARMA (
+            idArma SERIAL PRIMARY KEY,
+            idItem INT,
+            tipo VARCHAR(50),
+            alcance INT,
+            CONSTRAINT FK_ARMA_ITEM FOREIGN KEY (idItem) REFERENCES ITEM(idItem)
+        );
         """,
         """
-        create table ARMA_BRANCA (
-            idArma int not null,
-            danoCorte int,
-            durabilidade int,
-            danoPerfurante int,
-            constraint ARMA_BRANCA_PK primary key (idArma),
-            constraint FK_ARMA_BRANCA_ARMA foreign key (idArma) references ARMA(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS ARMA_BRANCA (
+            idArma INT PRIMARY KEY,
+            danoCorte INT,
+            durabilidade INT,
+            danoPerfurante INT,
+            CONSTRAINT FK_ARMA_BRANCA_ARMA FOREIGN KEY (idArma) REFERENCES ARMA(idArma)
+        );
         """,
         """
-        create table ARMA_DE_FOGO (
-            idArma int not null,
-            precisao int,
-            inicioVeloz int,
-            tempoRecarga int,
-            capacidade int,
-            constraint ARMA_DE_FOGO_PK primary key (idArma),
-            constraint FK_ARMA_DE_FOGO_ARMA foreign key (idArma) references ARMA(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS ARMA_DE_FOGO (
+            idArma INT PRIMARY KEY,
+            precisao INT,
+            inicioVeloz INT,
+            tempoRecarga INT,
+            capacidade INT,
+            CONSTRAINT FK_ARMA_DE_FOGO_ARMA FOREIGN KEY (idArma) REFERENCES ARMA(idArma)
+        );
         """,
         """
-        create table EXPLOSIVO (
-            idArma int not null,
-            danoArea int,
-            constraint EXPLOSIVO_PK primary key (idArma),
-            constraint FK_EXPLOSIVO_ARMA foreign key (idArma) references ARMA(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS EXPLOSIVO (
+            idArma INT PRIMARY KEY,
+            danoArea INT,
+            CONSTRAINT FK_EXPLOSIVO_ARMA FOREIGN KEY (idArma) REFERENCES ARMA(idArma)
+        );
         """,
         """
-        create table ESPINGARDA_SERRADA (
-            idArma int not null,
-            danoExtraCurto int,
-            constraint ESPINGARDA_SERRADA_PK primary key (idArma),
-            constraint FK_ESPINGARDA_SERRADA_ARMA foreign key (idArma) references ARMA_DE_FOGO(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS ESPINGARDA_SERRADA (
+            idArma INT PRIMARY KEY,
+            danoExtraCurto INT,
+            CONSTRAINT FK_ESPINGARDA_SERRADA_ARMA FOREIGN KEY (idArma) REFERENCES ARMA_DE_FOGO(idArma)
+        );
         """,
         """
-        create table RIFLE (
-            idArma int not null,
-            penetracao int,
-            constraint RIFLE_PK primary key (idArma),
-            constraint FK_RIFLE_ARMA foreign key (idArma) references ARMA_DE_FOGO(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS RIFLE (
+            idArma INT PRIMARY KEY,
+            penetracao INT,
+            CONSTRAINT FK_RIFLE_ARMA FOREIGN KEY (idArma) REFERENCES ARMA_DE_FOGO(idArma)
+        );
         """,
         """
-        create table COLT_45 (
-            idArma int not null,
-            constraint COLT_45_PK primary key (idArma),
-            constraint FK_COLT_45_ARMA foreign key (idArma) references ARMA_DE_FOGO(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS COLT_45 (
+            idArma INT PRIMARY KEY,
+            CONSTRAINT FK_COLT_45_ARMA FOREIGN KEY (idArma) REFERENCES ARMA_DE_FOGO(idArma)
+        );
         """,
         """
-        create table REVOLVER (
-            idArma int not null,
-            constraint REVOLVER_PK primary key (idArma),
-            constraint FK_REVOLVER_ARMA foreign key (idArma) references ARMA_DE_FOGO(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS REVOLVER (
+            idArma INT PRIMARY KEY,
+            CONSTRAINT FK_REVOLVER_ARMA FOREIGN KEY (idArma) REFERENCES ARMA_DE_FOGO(idArma)
+        );
         """,
         """
-        create table PISTOLA_DERRINGER (
-            idArma int not null,
-            constraint PISTOLA_DERRINGER_PK primary key (idArma),
-            constraint FK_PISTOLA_DERRINGER_ARMA foreign key (idArma) references ARMA_DE_FOGO(idArma)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS PISTOLA_DERRINGER (
+            idArma INT PRIMARY KEY,
+            CONSTRAINT FK_PISTOLA_DERRINGER_ARMA FOREIGN KEY (idArma) REFERENCES ARMA_DE_FOGO(idArma)
+        );
         """,
         """
-        create table INVENTARIO (
-            idInventario int not null auto_increment,
-            idPersonagem int,
-            item varchar(255),
-            constraint INVENTARIO_PK primary key (idInventario),
-            constraint FK_INVENTARIO_PERSONAGEM foreign key (idPersonagem) references PERSONAGEM(idPersonagem)
-        ) ENGINE = INNODB;
+        CREATE TABLE IF NOT EXISTS INVENTARIO (
+            idInventario SERIAL PRIMARY KEY,
+            idPersonagem INT,
+            item VARCHAR(255),
+            CONSTRAINT FK_INVENTARIO_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)
+        );
         """)
     try:
         for comando in comandos:
