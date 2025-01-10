@@ -46,3 +46,6 @@ nav:
     - Modelo Entidade-Relacionamento: modelagem/Modelo_Entidade_Relacionamento.md
     - Dicionário de Dados: modelagem/Dicionario_Dados.md
     - Modelo Relacional: modelagem/Modelo_Relacional.md
+  - SQL: 
+    - Tabelas: sql/Tabelas.md
+    
