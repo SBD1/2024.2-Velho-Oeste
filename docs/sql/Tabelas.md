@@ -323,3 +323,8 @@ CREATE TABLE IF NOT EXISTS INVENTARIO (
     CONSTRAINT FK_INVENTARIO_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)
 );
 ````
+## Histórico de Versão
+
+| Versão |    Data    |                     Descrição                     |                                                                                                Autor(es)                                                                                                 |
+| :----: | :--------: | :-----------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| `1.0`  | 10/01/2025 | Adicionando CREATE das tabelas do jogo | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
