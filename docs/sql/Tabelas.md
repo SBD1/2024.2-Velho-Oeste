@@ -15,6 +15,7 @@
 ```sql       
 CREATE TABLE IF NOT EXISTS PERSONAGEM_PRINCIPAL (
     idPersonagem INT PRIMARY KEY,
+    nome VARCHAR(100),
     inventario VARCHAR(255),
     reputacao INT,
 
@@ -27,8 +28,9 @@ CREATE TABLE IF NOT EXISTS PERSONAGEM_PRINCIPAL (
 CREATE TABLE IF NOT EXISTS MISSAO (
     idMissao SERIAL PRIMARY KEY,
     tipo VARCHAR(50),
+    nome VARCHAR(255),
     dinheiro NUMERIC(10, 2),
-    descricao TEXT,
+    descricao VARCHAR(5000),
     reputacao INT
 );
 ````
@@ -328,3 +330,4 @@ CREATE TABLE IF NOT EXISTS INVENTARIO (
 | Versão |    Data    |                     Descrição                     |                                                                                                Autor(es)                                                                                                 |
 | :----: | :--------: | :-----------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | `1.0`  | 10/01/2025 | Adicionando CREATE das tabelas do jogo | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
+| `1.1`  | 13/01/2025 | Adicionando e alterando alguns atributos | [Brenno da Silva](https://github.com/brenno-silva01) |                                                |
