@@ -18,7 +18,6 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS PERSONAGEM_PRINCIPAL (
             idPersonagem INT PRIMARY KEY,
-            nome VARCHAR(100),
             inventario VARCHAR(255),
             reputacao INT,
             CONSTRAINT FK_PERSONAGEM_PRINCIPAL_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)

@@ -1,13 +1,13 @@
-# import psycopg2
-# from database import DataBase
+from create_player import Start
 import time
 
-class start:
+class Menu:
     def main_menu(self):
         while True:
             escolha = input("Escolha uma opção:")
             if escolha == '1':
-                pass
+                player = Start().create_inventory()
+                #missao
             elif escolha == '2':
                 pass
             elif escolha == '3':
@@ -27,7 +27,7 @@ if __name__ == "__main__":
         time.sleep(seconds)
     history("O velho oeste é um lugar repleto de mistérios", 3)
     history("É um lugar onde sobrevivem apenas os fortes e corajosos ", 3)
-    history("Onde se vencer se torna o herói ", 3)
+    history("Onde se vencer se torna o herói ", 2.5)
     history("Se perder ", 2)
     history("Você morre...", 2)
 
@@ -43,5 +43,5 @@ if __name__ == "__main__":
                   6 - Sair
                 '''
             )
-    start = start().main_menu()
+    menu = Menu().main_menu()
     
