@@ -1,3 +1,4 @@
+import sys
 from create_player import Start
 from database import DataBase
 import time
@@ -26,6 +27,7 @@ class Menu:
                 pass
             elif escolha == '6':
                 print("Obrigado por Jogar ;)")
+                sys.exit()
             else:
                 print("Opção Inválida, tente novamente.")
     
