@@ -11,6 +11,7 @@ services:
       - DATABASE_URL=postgresql://velho_oeste_user:vopassword@postgres:5432/velho_oeste_db
     volumes:
       - .:/app  
+    container_name: velho-oeste
 
   postgres:
     image: postgres:latest

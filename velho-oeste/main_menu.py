@@ -7,8 +7,10 @@ class Menu:
             escolha = input("Escolha uma opção:")
             if escolha == '1':
                 player = Start().create_inventory()
+                break
                 #missao
             elif escolha == '2':
+                #consulta para as missoes
                 pass
             elif escolha == '3':
                 pass
