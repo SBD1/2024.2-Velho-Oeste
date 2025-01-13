@@ -8,6 +8,30 @@ No papel de um caçador de recompensas, o jogador viaja de cidade em cidade pelo
 
 Mergulhe nessa experiência e Conquiste o título de "Caçador de Recompensas Lendário" ao capturar todos os bandidos mais procurados e completar desafios nas cidades. 
 
+# Execução do Jogo
+
+Para executar o jogo em um contêiner Docker, siga os passos abaixo:
+
+## Clone o Repositório
+
+Primeiro, clone o repositório para o seu ambiente local:
+
+## Crie o Conteiner
+
+```bash
+docker-compose up
+```
+Se necessário, copie o endereço IP do conteiner e cole no host do arquivo databe.py. Obtenha o IP com o seguinte comando:
+
+```bash
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' velho_oeste
+```
+
+## Execute o Jogo
+```bash
+docker exec -it velho_oeste python /app/velho-oeste/main_menu.py
+```
+
 # Desenvolvedores
 
 <table>
