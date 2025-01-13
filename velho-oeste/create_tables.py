@@ -1,7 +1,8 @@
 import psycopg2
-from database import create_connection
+from database import DataBase
 
-connection = create_connection()
+db = DataBase()
+connection = db.create_connection()
 cur = connection.cursor()
 
 def create_tables():
@@ -17,6 +18,7 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS PERSONAGEM_PRINCIPAL (
             idPersonagem INT PRIMARY KEY,
+            nome VARCHAR(100),
             inventario VARCHAR(255),
             reputacao INT,
             CONSTRAINT FK_PERSONAGEM_PRINCIPAL_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)
@@ -97,17 +99,17 @@ def create_tables():
         );
         """,
         """
+        CREATE TABLE IF NOT EXISTS MUNDO (
+            idMundo SERIAL PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL
+        );
+        """,
+        """
         CREATE TABLE IF NOT EXISTS LOCALIZACAO (
             idLocal SERIAL PRIMARY KEY,
             nome VARCHAR(100) NOT NULL,
             idMundo INT NOT NULL,
             CONSTRAINT FK_LOCALIZACAO_MUNDO FOREIGN KEY (idMundo) REFERENCES MUNDO(idMundo)
-        );
-        """,
-        """
-        CREATE TABLE IF NOT EXISTS MUNDO (
-            idMundo SERIAL PRIMARY KEY,
-            nome VARCHAR(100) NOT NULL
         );
         """,
         """
@@ -242,16 +244,17 @@ def create_tables():
             item VARCHAR(255),
             CONSTRAINT FK_INVENTARIO_PERSONAGEM FOREIGN KEY (idPersonagem) REFERENCES PERSONAGEM(idPersonagem)
         );
-        """)
+        """, )
     try:
         for comando in comandos:
             cur.execute(comando)
 
         connection.commit()
+        print("Tabelas criadas com sucesso")
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
-        print("Tabelas criadas com sucesso")
+        print("Processo Finalizado")
 
 if __name__ == '__main__':
     create_tables()
