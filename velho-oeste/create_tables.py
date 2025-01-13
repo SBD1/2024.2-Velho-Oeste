@@ -27,8 +27,9 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS MISSAO (
             idMissao SERIAL PRIMARY KEY,
             tipo VARCHAR(50),
+            nome VARCHAR(255),
             dinheiro NUMERIC(10, 2),
-            descricao TEXT,
+            descricao VARCHAR(5000),
             reputacao INT
         );
         """,
