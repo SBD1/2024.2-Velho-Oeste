@@ -1,5 +1,10 @@
 from create_player import Start
+from database import DataBase
 import time
+import psycopg2
+
+conn = DataBase().create_connection()
+cur = conn.cursor()
 
 class Menu:
     def main_menu(self):
@@ -11,7 +16,8 @@ class Menu:
                 #missao
             elif escolha == '2':
                 #consulta para as missoes
-                pass
+                self.list_missions()
+                break
             elif escolha == '3':
                 pass
             elif escolha == '4':
@@ -22,6 +28,33 @@ class Menu:
                 print("Obrigado por Jogar ;)")
             else:
                 print("Opção Inválida, tente novamente.")
+    
+
+    def list_missions(self):
+        try:
+            # Consultar todas as missões do banco de dados
+            query = "SELECT idMissao, nome, tipo, dinheiro, reputacao, descricao FROM MISSAO"
+            cur.execute(query)
+            missions = cur.fetchall()
+
+            if not missions:
+                print("\nNenhuma missão disponível.\n")
+                return
+
+            print("\n=== Missões que você encontrará no jogo ===\n")
+            for mission in missions:
+                id_missao, nome, tipo, dinheiro, reputacao, descricao = mission
+                print(f"ID: {id_missao}")
+                print(f"Nome: {nome}")
+                print(f"Tipo: {tipo}")
+                print(f"Recompensa: ${dinheiro:.2f}")
+                print(f"Reputação: {reputacao} pontos")
+                print("Descrição:")
+                print(descricao)
+                print("-" * 50)
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(f"Erro ao listar missões: {error}")
+
 
 if __name__ == "__main__":
     def history(message, seconds):
