@@ -1,7 +1,7 @@
 import psycopg2
 
 class DataBase ():
-    def create_connection():
+    def create_connection(self):
         connect = psycopg2.connect(
             host="localhost",
             database="velho_oeste_db",
