@@ -3,6 +3,8 @@ from create_player import Start
 from database import DataBase
 import time
 import psycopg2
+from create_locales import Locales
+from mission import Mission
 
 conn = DataBase().create_connection()
 cur = conn.cursor()
@@ -16,13 +18,21 @@ class Menu:
                 break
                 #missao
             elif escolha == '2':
-                #consulta para as missoes
+                mission = Mission()
+                mission.create_mission_1()
+                mission.create_mission_2()
+                mission.create_mission_3()
+                mission.create_mission_4()
+                mission.create_mission_5()
+                mission.create_mission_6()
                 self.list_missions()
                 break
             elif escolha == '3':
                 pass
             elif escolha == '4':
-                pass
+                locais = Locales()
+                locais.create_cities()
+                self.list_cities()
             elif escolha == '5':
                 pass
             elif escolha == '6':
@@ -56,6 +66,34 @@ class Menu:
                 print("-" * 50)
         except (Exception, psycopg2.DatabaseError) as error:
             print(f"Erro ao listar missões: {error}")
+
+    def list_cities(self):
+        try:
+            # Consultar todas as cidades do banco de dados
+            query = """
+            SELECT c.idCidade, c.nome, c.localizacao, l.nome AS localizacao_nome, m.nome AS mundo_nome
+            FROM CIDADE c
+            JOIN LOCALIZACAO l ON c.idLocal = l.idLocal
+            JOIN MUNDO m ON l.idMundo = m.idMundo
+            """
+            cur.execute(query)
+            cities = cur.fetchall()
+
+            if not cities:
+                print("\nNenhuma cidade disponível.\n")
+                return
+
+            print("\n=== Cidades no Mundo ===\n")
+            for city in cities:
+                id_cidade, nome_cidade, localizacao, localizacao_nome, mundo_nome = city
+                print(f"ID: {id_cidade}")
+                print(f"Nome: {nome_cidade}")
+                print(f"Localização: {localizacao} - {localizacao_nome}")
+                print(f"Mundo: {mundo_nome}")
+                print("-" * 50)
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(f"Erro ao listar cidades: {error}")
+
 
 
 if __name__ == "__main__":
