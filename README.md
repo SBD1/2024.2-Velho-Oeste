@@ -21,11 +21,6 @@ Primeiro, clone o repositório para o seu ambiente local:
 ```bash
 docker-compose up
 ```
-Se necessário, copie o endereço IP do conteiner e cole no host do arquivo databe.py. Obtenha o IP com o seguinte comando:
-
-```bash
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' velho_oeste
-```
 
 ## Execute o Jogo
 ```bash
