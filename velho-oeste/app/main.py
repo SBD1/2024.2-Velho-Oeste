@@ -8,11 +8,11 @@ conn = ContainerConnection.connect()
 cur = conn.cursor()
 
 class Menu:
-
+    
     @classmethod
     def main_menu(cls):
         while True:
-            escolha = input("Escolha uma opção:")
+            escolha = input("\nEscolha uma opção:")
             
             if escolha == '1':
                 player = Start().create_inventory()
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     #     time.sleep(seconds)
     # history("O velho oeste é um lugar repleto de mistérios", 3)
     # history("É um lugar onde sobrevivem apenas os fortes e corajosos ", 3)
-    # history("Onde se vencer se torna o herói ", 2.5)
+    # history("Onde se vencer, você se torna o herói ", 2.5)
     # history("Se perder ", 2)
     # history("Você morre...", 2)
 
@@ -139,5 +139,5 @@ if __name__ == "__main__":
                   5 - Explorar Missões
                   6 - Sair
                 '''
-            )
+        )
     menu = Menu().main_menu()
