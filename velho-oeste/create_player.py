@@ -22,7 +22,6 @@ class Start:
             cur.execute(command, (name, "Principal"))
             id_player = cur.fetchone()[0]
             conn.commit()
-            print("Personagem criado com sucesso")
             return id_player
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -36,13 +35,12 @@ class Start:
             item = ("Pistola", "Laço")
             cur.execute(command, (idPersonagem, item, 50))
             conn.commit()
-            print("Personagem Principal Criado")
             return item
         except(Exception, psycopg2.DatabaseError) as error:
             print(f'Erro na criação do personagem principal: {error}')
     
     """Criação do Inventario"""
-    def create_inventory(self):
+    def create_player_inventory(self):
         command = """INSERT INTO inventario(idPersonagem, item) 
                     VALUES (%s, %s)"""
         try:
@@ -51,7 +49,6 @@ class Start:
             item = st.create_main_player(idPersonagem)
             cur.execute(command, (idPersonagem, item))
             conn.commit()
-            print("Inventario Criado")
         except(Exception, psycopg2.DatabaseError) as error:
             print(f'Erro na criação do inventario: {error}')
 
