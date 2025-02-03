@@ -1,9 +1,10 @@
-FROM python:3.10-slim
+FROM python:3.11
 
 WORKDIR /app
 
-COPY . .
-
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["tail", "-f", "/dev/null"]
+COPY app/ .
+
+CMD ["python", "main.py"]
