@@ -1,30 +1,16 @@
-version: '3.10'
+version: '3.11'
 
 services:
-  python:
-    build:
-      context: .
-      dockerfile: Dockerfile  
-    depends_on:
-      - postgres
-    environment:
-      - DATABASE_URL=postgresql://velho_oeste_user:vopassword@postgres:5432/velho_oeste_db
-    volumes:
-      - .:/app  
-    container_name: velho-oeste
-
-  postgres:
+  db:
     image: postgres:latest
-    container_name: velho-oeste-postgres
+    container_name: oeste_db
     environment:
-      POSTGRES_USER: velho_oeste_user
-      POSTGRES_PASSWORD: vopassword
-      POSTGRES_DB: velho_oeste_db
+      POSTGRES_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./velho-oeste/database/00_create_tables.sql:/docker-entrypoint-initdb.d/00_create_tables.sql
-
-volumes:
-  postgres_data:
+      - ./database:/docker-entrypoint-initdb.d
+    volumes:
+      pgdata:
