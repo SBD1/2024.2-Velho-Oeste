@@ -14,17 +14,15 @@ class Menu:
         while True:
             escolha = input("Escolha uma opção:")
             if escolha == '1':
-                player = Start().create_inventory()
-                break
+                player = Start().create_player_inventory()
+                # Criar NPC
+                Mission().Mission_1()
+                # Mission().Mission_2()
+                # Mission().Mission_3()
+                # Mission().Mission_4()
+                print("Parabens forasteiro, você completou o jogo e se tornou o PISTOLEIRO LENDÀRIO!")
                 #missao
             elif escolha == '2':
-                mission = Mission()
-                mission.create_mission_1()
-                mission.create_mission_2()
-                mission.create_mission_3()
-                mission.create_mission_4()
-                mission.create_mission_5()
-                mission.create_mission_6()
                 self.list_missions()
                 break
             elif escolha == '3':
@@ -118,5 +116,12 @@ if __name__ == "__main__":
                   6 - Sair
                 '''
             )
+    mission = Mission()
+    mission.create_mission_1()
+    mission.create_mission_2()
+    mission.create_mission_3()
+    mission.create_mission_4()
+    mission.create_mission_5()
+    mission.create_mission_6()
     menu = Menu().main_menu()
     
