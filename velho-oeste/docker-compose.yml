@@ -12,7 +12,7 @@ services:
       - "5432:5432"
     volumes:
       - ./database/create:/docker-entrypoint-initdb.d
-      # - ./database/populating:/docker-entrypoint-initdb.d
+      # - ./database/populating/01_population_tables:/docker-entrypoint-initdb.d/populating/01_population_tables
       # - ./database/integrity_control:/docker-entrypoint-initdb.d
       - pgdata:/var/lib/postgresql/data
 volumes:

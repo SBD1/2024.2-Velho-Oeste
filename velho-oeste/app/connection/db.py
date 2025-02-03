@@ -26,13 +26,11 @@ class ContainerConnection:
                     password=password
                 )
 
-                print("Conexão feita com sucesso")
+                # print("Conexão feita com sucesso")
             except OperationalError as e:
-                print(f"Erro ao estabelecer conexão: {e}")
+                # print(f"Erro ao estabelecer conexão: {e}")
                 cls.connection = None
-        else:
-            print("Conexão já estabelecida")
-        
+
         return cls.connection
     
     @classmethod
@@ -48,4 +46,4 @@ class ContainerConnection:
         if cls.connection:
             cls.connection.close()
             cls.connection = None
-            print("Conexão fechada")
+            # print("Conexão fechada")
