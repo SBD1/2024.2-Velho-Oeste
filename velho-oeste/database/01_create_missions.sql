@@ -1,0 +1,7 @@
+INSERT INTO MISSAO (nome, tipo, descricao, dinheiro, reputacao) VALUES
+('Início da Jornada', 'Principal', 'Após ouvir histórias sobre bandidos que aterrorizam cidades vizinhas, o caçador de recompensas chega ao Saloon e encontra o xerife, que apresenta seu primeiro contrato: capturar um ladrão de cavalos conhecido por saquear vilas próximas.', 50.00, 10),
+('O Cemitério Assombrado',  'Principal', 'Os moradores relatam eventos estranhos no cemitério, onde dizem ver fantasmas e ouvir vozes. O coveiro pede ajuda ao jogador para investigar.', 20.00, 5),
+('Perigo no Trem',  'Principal', 'O jogador recebe informações da dama do Saloon sobre um assalto a um trem que carrega ouro e mercadorias valiosas.', 100.00, 20),
+('O Ouro da Montanha',  'Principal', 'Com o mapa da mina obtido no cemitério, o jogador é atraído para explorar a montanha e encontrar uma mina que dizem guardar riquezas, mas que é protegida por bandidos locais.', 200.00, 30),
+('A Diligência',  'Secundária', 'O mercador de cavalos pede ajuda ao jogador para proteger uma diligência carregada de suprimentos e remédios que será enviada para uma cidade próxima.', 150.00, 15),
+('A Última Fronteira',  'Principal', 'O xerife pede ajuda para capturar um dos criminosos mais procurados, o líder de uma gangue de bandidos chamada de “Os Renegados do Deserto”.', 500.00, 50);
