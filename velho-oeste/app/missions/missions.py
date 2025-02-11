@@ -4,7 +4,6 @@ from connection.db import ContainerConnection
 import os
 import sys
 
-
 conn = ContainerConnection.connect()
 cur = conn.cursor()
 
@@ -22,9 +21,11 @@ class Mission():
         mission = cur.fetchone()
         return mission
 
-    def search_npc(self):
-        cur.execute("""SELECT * FROM npc LEFT JOIN Personagem 
-                    ON npc.idpersonagem = Personagem.idpersonagem;""")
+    def search_npc(self, name):
+        # cur.execute(f"""SELECT * FROM npc LEFT JOIN Personagem 
+        #             ON npc.idpersonagem = Personagem.idpersonagem
+        #             WHERE name = {name};""")
+        cur.execute(f"SELECT * FROM personagem WHERE nome = '{name}';")
         npc = cur.fetchone()
         return npc
     
@@ -36,7 +37,7 @@ class Mission():
 
     def fight(self, player, npc):
         player_name = player[4]
-        npc_name = npc[4]
+        npc_name = npc[1]
 
         print("\nPara completar essa missão, você deve enfrentar o líder dos bandidos.\n")
         print(f"⚔️  {player_name} VS {npc_name} ⚔️\n")
@@ -103,17 +104,46 @@ class Mission():
         try:
             player = mission.search_player(IdPersonagem)
             mission_1 = mission. search_mission(1) 
-            npc = mission.search_npc() 
+            npc = mission.search_npc("Jack McGraw") 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
         description = mission_1[2]
         print(description)
+        input("Pressione Enter para iniciar o combate...")
         mission.fight(player, npc)
-        mission.mission_2()
+        input("Pressione Enter para a próxima missão")
+        mission.mission_2(IdPersonagem)
     
-    def mission_2(self):
-        pass
+    def mission_2(self, IdPersonagem):
+        mission = Mission()
+        try:
+            player = mission.search_player(IdPersonagem)
+            mission_2 = mission. search_mission(2) 
+            npc = mission.search_npc('Barney Louco') 
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        description = mission_2[2]
+        print(description)
+        input("Pressione Enter para iniciar o combate...")
+        mission.fight(player, npc)
+        input("Pressione Enter para a próxima missão")
+        mission.mission_3(IdPersonagem)
+
+
+    def mission_3(self, IdPersonagem):
+        mission = Mission()
+        try:
+            player = mission.search_player(IdPersonagem)
+            mission_2 = mission. search_mission(3) 
+            npc = mission.search_npc("Jack Matador") 
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        description = mission_2[2]
+        print(description)
+        input("Pressione Enter para iniciar o combate...")
+        mission.fight(player, npc)
+        print("Obrigado por Jogar 🎉")
+        sys.exit()
         
 if __name__ == "__main__":
-    # Mission().Mission_1()
-    Mission().search_player()
+    Mission().Mission_1()

@@ -2,6 +2,7 @@ import psycopg2
 from connection.db import ContainerConnection
 import time
 from missions.missions import Mission
+import os
 
 conn = ContainerConnection.connect()
 cur = conn.cursor()
@@ -52,6 +53,8 @@ class Player:
             conn.commit()
         except(Exception, psycopg2.DatabaseError) as error:
             print(f'Erro na criação do inventario: {error}')
+
+        os.system('clear')  
         Mission().Mission_1(idPersonagem)
 
 if __name__ == "__main__":

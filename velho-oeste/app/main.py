@@ -37,9 +37,7 @@ class Menu:
                                 1 - Iniciar o Jogo
                                 2 - Conhecer Missões
                                 3 - Conhecer NPC's
-                                4 - Explorar o mundo
-                                5 - Explorar Missões
-                                6 - Sair
+                                4 - Sair
                                 '''
                             )
                         break
@@ -52,14 +50,6 @@ class Menu:
             elif escolha == '3':
                 pass
             elif escolha == '4':
-                # locais = Locales()
-                # locais.create_cities()
-                # self.list_cities()
-                pass
-
-            elif escolha == '5':
-                pass
-            elif escolha == '6':
                 print("Obrigado por Jogar ;)")
                 sys.exit()
             else:
@@ -137,9 +127,7 @@ if __name__ == "__main__":
                   1 - Iniciar o Jogo
                   2 - Conhecer Missões
                   3 - Conhecer NPC's
-                  4 - Explorar o mundo
-                  5 - Explorar Missões
-                  6 - Sair
+                  4 - Sair
                 '''
         )
     menu = Menu().main_menu()
