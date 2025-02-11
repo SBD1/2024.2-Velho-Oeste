@@ -1,11 +1,12 @@
 import psycopg2
-from database import DataBase
+from connection.db import ContainerConnection
 import time
+from missions.missions import Mission
 
-conn = DataBase().create_connection()
+conn = ContainerConnection.connect()
 cur = conn.cursor()
 
-class Start:
+class Player:
     def history(self):
         pass
     """Cria o Personagem"""
@@ -44,14 +45,15 @@ class Start:
         command = """INSERT INTO inventario(idPersonagem, item) 
                     VALUES (%s, %s)"""
         try:
-            st = Start()
+            st = Player()
             idPersonagem = st.create_player()
             item = st.create_main_player(idPersonagem)
             cur.execute(command, (idPersonagem, item))
             conn.commit()
         except(Exception, psycopg2.DatabaseError) as error:
             print(f'Erro na criação do inventario: {error}')
+        Mission().Mission_1(idPersonagem)
 
 if __name__ == "__main__":
-    Start().create_inventory()
+    Player().create_player_inventory()
     

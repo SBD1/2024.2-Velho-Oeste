@@ -3,6 +3,7 @@ import time
 import psycopg2
 from connection.db import ContainerConnection
 from missions.list_missions import Mission
+from player.create_player import Player
 
 conn = ContainerConnection.connect()
 cur = conn.cursor()
@@ -15,7 +16,7 @@ class Menu:
             escolha = input("\nEscolha uma opção:")
             
             if escolha == '1':
-                player = Start().create_inventory()
+                player = Player().create_player_inventory()
                 break
                 #missao
             elif escolha == '2':
@@ -51,9 +52,10 @@ class Menu:
             elif escolha == '3':
                 pass
             elif escolha == '4':
-                locais = Locales()
-                locais.create_cities()
-                self.list_cities()
+                # locais = Locales()
+                # locais.create_cities()
+                # self.list_cities()
+                pass
 
             elif escolha == '5':
                 pass
